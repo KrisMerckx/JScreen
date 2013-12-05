@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		body{
+		 font-family:arial, helvetica, sans-serif;
+		 font-size:small;	
+		}
+	</style>
+	<script>
+
+	
+	/*
+	JAVASCRIPT SCREEN DRIVER
+	JScreen 
+	Kris Merckx 2013
+	*/
+	
+		function StartScreen(screen, params){
+			var monitor= document.getElementById(screen);
+			monitor.style.position="relative";
+			monitor.style.overflow="hidden";
+			monitor.style.margin=0;
+			monitor.style.padding=0;
+			//monitor.style.color=params.color;
+			var lines= params.lines;
+			var cols= params.cols;
+			var pixelFormat= params.pixelFormat;
+			DrawPixels(screen, lines, cols, pixelFormat);
+		}
+		function DrawPixels(screen,lines, cols, pixelFormat){
+			var monitor= document.getElementById(screen);
+			var totPixsHor= parseInt(cols/pixelFormat);
+			var totPixsVer= parseInt(lines/pixelFormat);
+			var pixPosV=0;
+			for(line=1;line<=totPixsVer; line +=1){
+				var pixPosH=0;
+				for(px= 1; px <= totPixsHor; px += 1){
+					var pixel= document.createElement("div");
+					pixel.style.width= pixelFormat + "px";
+					pixel.style.height=pixelFormat + "px";
+					pixel.style.position="absolute";
+					pixel.style.marginLeft=pixPosH + "px";
+					pixel.style.marginTop=pixPosV + "px";
+					//pixel.style.border= "1px solid black";
+					pixel.className=line + "row " + px + "col";
+					var mid=line + "row"+ px + "col" ;
+					pixel.setAttribute("id", mid);
+					monitor.appendChild(pixel);
+					pixPosH=pixPosH+pixelFormat;
+				}
+				pixPosV= pixPosV+pixelFormat;
+			}
+		}
+		function DrawCharsOnLines(){
+			//functie in voorbereiding
+			//splits een tekst in zijn karakters
+			//houd de positie bij van elk karakter
+			//roep de functie DrawCharacters op voor elk karakter
+			//houd alle beschikbare karakters bij in een array
+			//controleer of het karakter bestaat...
+		}
+		function DrawCharacters(chars, startCol, startRow){
+			//tel het aantal karakters
+			//groter dan aantal divs op Ã©Ã©n lijn? 
+			// Zo ja: gan dan naar volgende lijn
+			var startposition=0;
+			
+			
+			var ch= eval(chars);
+			var Ccols = ch[0].length;
+			var Crows = ch.length;
+			//var sel= document.getElementById("1row1col");
+			for (var y=0;y<Crows;y++) {
+				for (var x=0;x<Ccols;x++) {
+					var $e= ch[y][x];
+					if($e>0){
+						var ty=y+startRow;
+						var tx=x+startCol;
+						var temp= ty + "row" + tx + "col";
+						var temp2= document.getElementById(temp);
+						if (temp2 != null){							
+							temp2.style.backgroundColor= "black";
+						}						
+					}
+				}
+			}
+			
+			
+			
+		}
+		
+		var a = [
+				[0,0,0,1,0,0,0],
+				[0,0,1,1,1,0,0],
+				[0,1,1,0,1,1,0],
+				[0,1,0,0,0,1,0],
+				[0,1,1,1,1,1,0],
+				[0,1,0,0,0,1,0]
+		];
+		var b = [
+				[0,1,1,1,0,0,0],
+				[0,1,0,0,1,0,0],
+				[0,1,1,1,0,0,0],
+				[0,1,0,0,1,0,0],
+				[0,1,0,0,0,1,0],
+				[0,1,1,1,1,0,0]
+		];
+		var c = [
+				[0,0,0,1,1,0,0],
+				[0,0,1,0,0,1,0],
+				[0,1,0,0,0,0,0],
+				[0,1,0,0,0,0,0],
+				[0,0,1,0,0,1,0],
+				[0,0,0,1,1,0,0]
+		];
+		var d = [
+				[0,1,1,1,0,0,0],
+				[0,1,0,0,1,0,0],
+				[0,1,0,0,0,1,0],
+				[0,1,0,0,0,1,0],
+				[0,1,0,0,1,0,0],
+				[0,1,1,1,0,0,0]
+		];
+		var e = [
+				[0,1,1,1,1,1,0],
+				[0,1,0,0,0,0,0],
+				[0,1,1,1,1,1,0],
+				[0,1,0,0,0,0,0],
+				[0,1,0,0,0,0,0],
+				[0,1,1,1,1,1,0]
+		];
+		var f = [
+				[0,1,1,1,1,1,0],
+				[0,1,0,0,0,0,0],
+				[0,1,1,1,1,1,0],
+				[0,1,0,0,0,0,0],
+				[0,1,0,0,0,0,0],
+				[0,1,0,0,0,0,0]
+		];
+		var g = [
+				[0,0,1,1,1,0,0],
+				[0,1,0,0,0,1,0],
+				[0,1,0,0,0,0,0],
+				[0,1,0,0,1,1,0],
+				[0,1,0,0,0,1,0],
+				[0,0,1,1,1,0,0]
+		];
+		var h = [
+				[0,1,0,0,0,1,0],
+				[0,1,0,0,0,1,0],
+				[0,1,1,1,1,1,0],
+				[0,1,0,0,0,1,0],
+				[0,1,0,0,0,1,0],
+				[0,1,0,0,0,1,0]
+		];
+		var i = [
+				[0,1,0],
+				[0,0,0],
+				[0,1,0],
+				[0,1,0],
+				[0,1,0],
+				[0,1,0]
+		];
+		var j = [
+				[0,0,1,0],
+				[0,0,0,0],
+				[0,0,1,0],
+				[0,0,1,0],
+				[0,0,1,0],
+				[0,1,1,0]
+		];
+		
+		var t = [
+				[0,1,1,1,1,1,0],
+				[0,0,0,1,0,0,0],
+				[0,0,0,1,0,0,0],
+				[0,0,0,1,0,0,0],
+				[0,0,0,1,0,0,0],
+				[0,0,0,1,0,0,0]
+		];
+		var z = [
+				[0,1,1,1,1,1,0],
+				[0,0,0,0,0,1,0],
+				[0,0,0,0,1,0,0],
+				[0,0,0,1,0,0,0],
+				[0,0,1,0,0,0,0],
+				[0,1,1,1,1,1,0]
+		];
+		var plus = [
+				[0,0,0,0,0],
+				[0,0,1,0,0],
+				[0,1,1,1,0],
+				[0,0,1,0,0],
+				[0,0,0,0,0]
+		];
+		var invader = [
+				[0,0,1,0,0,0,0,0,1,0,0],
+				[0,0,0,1,0,0,0,1,0,0,0],
+				[0,0,1,1,1,1,1,1,1,0,0],
+				[0,1,1,0,1,1,1,0,1,1,0],
+				[1,1,1,1,1,1,1,1,1,1,1],
+				[1,0,1,1,1,1,1,1,1,0,1],
+				[1,0,1,0,0,0,0,0,1,0,1],
+				[0,0,0,1,1,0,1,1,0,0,0]
+		];
+		var smiley = [
+				[0,0,0,0,1,1,1,0,0,0,0],
+				[0,0,1,1,0,0,0,1,1,0,0],
+				[0,1,0,0,0,0,0,0,0,1,0],
+				[1,0,0,1,0,0,0,1,0,0,1],
+				[1,0,0,0,0,0,0,0,0,0,1],
+				[1,0,0,0,0,0,0,0,0,0,1],
+				[1,0,0,1,0,0,0,1,0,0,1],
+				[0,1,0,0,1,1,1,0,0,1,0],
+				[0,0,1,1,0,0,0,1,1,0,0],
+				[0,0,0,1,1,1,1,1,0,0,0]
+		];
+		var arrowRight = [
+				[0,0,0,0,0,0,0,1,0,0,0],
+				[0,0,0,0,0,0,0,1,1,0,0],
+				[0,1,1,1,1,1,1,1,1,1,0],
+				[0,0,0,0,0,0,0,1,1,0,0],
+				[0,0,0,0,0,0,0,1,0,0,0]
+		];
+		
+		var arrowLeft = [
+				[0,0,0,1,0,0,0,0,0,0,0],
+				[0,0,1,1,0,0,0,0,0,0,0],
+				[0,1,1,1,1,1,1,1,1,1,0],
+				[0,0,1,1,0,0,0,0,0,0,0],
+				[0,0,0,1,0,0,0,0,0,0,0]
+		];
+		
+		var RobinHood = [
+				[0,0,0,0,0,0,0,1,0,0,0],
+				[0,0,0,0,0,1,1,1,1,0,0],
+				[0,0,1,1,1,1,1,1,1,1,0],
+				[0,0,0,0,0,1,1,1,1,0,0],
+				[0,0,0,0,1,1,0,1,1,0,0],
+				[0,0,0,0,0,1,1,1,1,0,0],
+				[0,0,0,1,0,0,1,1,0,0,0],
+				[0,0,1,0,0,0,1,1,0,0,0],
+				[0,1,0,0,0,1,1,1,1,0,0],
+				[0,1,1,1,1,1,1,1,1,0,0],
+				[0,0,1,0,0,1,1,1,1,0,0],
+				[0,0,0,1,0,1,1,1,1,0,0],
+				[0,0,0,0,0,1,1,1,1,0,0],
+				[0,0,0,0,1,1,1,1,1,1,0],
+				[0,0,0,0,1,0,1,0,1,0,0],
+				[0,0,0,0,0,0,1,0,1,0,0],
+				[0,0,0,0,0,1,1,0,1,1,0]
+		];
+	
+	/*
+	SELECTEER PER KLASSE => CROSS-BROWSER (zonder jquery)
+	
+	Developed by Robert Nyman, http://www.robertnyman.com
+	Code/licensing: http://code.google.com/p/getelementsbyclassname/
+	*/	
+	var getElementsByClassName = function (className, tag, elm){
+		if (document.getElementsByClassName) {
+			getElementsByClassName = function (className, tag, elm) {
+				elm = elm || document;
+				var elements = elm.getElementsByClassName(className),
+					nodeName = (tag)? new RegExp("\\b" + tag + "\\b", "i") : null,
+					returnElements = [],
+					current;
+				for(var i=0, il=elements.length; i<il; i+=1){
+					current = elements[i];
+					if(!nodeName || nodeName.test(current.nodeName)) {
+						returnElements.push(current);
+					}
+				}
+				return returnElements;
+			};
+		}
+		else if (document.evaluate) {
+			getElementsByClassName = function (className, tag, elm) {
+				tag = tag || "*";
+				elm = elm || document;
+				var classes = className.split(" "),
+					classesToCheck = "",
+					xhtmlNamespace = "http://www.w3.org/1999/xhtml",
+					namespaceResolver = (document.documentElement.namespaceURI === xhtmlNamespace)? xhtmlNamespace : null,
+					returnElements = [],
+					elements,
+					node;
+				for(var j=0, jl=classes.length; j<jl; j+=1){
+					classesToCheck += "[contains(concat(' ', @class, ' '), ' " + classes[j] + " ')]";
+				}
+				try	{
+					elements = document.evaluate(".//" + tag + classesToCheck, elm, namespaceResolver, 0, null);
+				}
+				catch (e) {
+					elements = document.evaluate(".//" + tag + classesToCheck, elm, null, 0, null);
+				}
+				while ((node = elements.iterateNext())) {
+					returnElements.push(node);
+				}
+				return returnElements;
+			};
+		}
+		else {
+			getElementsByClassName = function (className, tag, elm) {
+				tag = tag || "*";
+				elm = elm || document;
+				var classes = className.split(" "),
+					classesToCheck = [],
+					elements = (tag === "*" && elm.all)? elm.all : elm.getElementsByTagName(tag),
+					current,
+					returnElements = [],
+					match;
+				for(var k=0, kl=classes.length; k<kl; k+=1){
+					classesToCheck.push(new RegExp("(^|\\s)" + classes[k] + "(\\s|$)"));
+				}
+				for(var l=0, ll=elements.length; l<ll; l+=1){
+					current = elements[l];
+					match = false;
+					for(var m=0, ml=classesToCheck.length; m<ml; m+=1){
+						match = classesToCheck[m].test(current.className);
+						if (!match) {
+							break;
+						}
+					}
+					if (match) {
+						returnElements.push(current);
+					}
+				}
+				return returnElements;
+			};
+		}
+		return getElementsByClassName(className, tag, elm);
+	};
+
+		
+	</script>
+</head>
+<body>
+	<div id="monitor"></div>
+	<p>JScreen - javascript Screen Driver - &copy; Kris Merckx 2013</p>
+	<style>
+		#monitor{
+			width:600px;
+			height:300px;
+			border:1px solid black;	
+		}
+		#monitor{
+			background-image:url(4px.jpg);	
+			/*background-color:#2d2e2d;*/
+		}
+	</style>
+	<script>
+		StartScreen("monitor",{
+			lines: 300,
+			cols: 600,
+			color: "green",
+			pixelFormat: 4
+		});
+		
+		DrawCharacters("a", 10, 2);
+		DrawCharacters("b", 16, 2);
+		DrawCharacters("c", 22, 2);
+		DrawCharacters("d", 28, 2);
+		DrawCharacters("e", 34, 2);
+		DrawCharacters("f", 40, 2);
+		DrawCharacters("g", 46, 2);
+		DrawCharacters("h", 52, 2);
+		DrawCharacters("i", 58, 2);
+		DrawCharacters("t", 60, 2);
+		DrawCharacters("z", 66, 2);
+		DrawCharacters("j", 75, 2);
+		DrawCharacters("plus", 81, 2);
+		DrawCharacters("invader", 58, 25);
+		DrawCharacters("invader", 46, 18);
+		DrawCharacters("smiley", 20, 10);
+		DrawCharacters("arrowRight", 25, 24);
+		DrawCharacters("arrowLeft", 12, 41);
+		DrawCharacters("RobinHood", 25, 34);
+		DrawCharacters("invader",144, 10);
+	</script>
+</body>
+</html>
